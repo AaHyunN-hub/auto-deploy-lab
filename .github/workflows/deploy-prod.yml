@@ -1,8 +1,10 @@
 name: 生产分支推送部署
+
 on:
   push:
     branches:
       - prod
+
 jobs:
   deploy-app:
     runs-on: ubuntu-latest
@@ -10,12 +12,12 @@ jobs:
       - name: 拉取代码
         uses: actions/checkout@v4
 
-- name: 上传文件到 AWS 服务器
-  uses: appleboy/scp-action@v0.1.7
-  with:
-    host: ${{ secrets.AWS_HOST }}
-    username: ${{ secrets.AWS_USER }}
-    key: ${{ secrets.AWS_KEY }}
-    port: 22
-    source: "html/"
-    target: "/var/www/html"
+      - name: 上传文件到 AWS 服务器
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_KEY }}
+          port: 22
+          source: "html/"
+          target: "/var/www/html"
